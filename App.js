@@ -1,46 +1,29 @@
+import React from "react";
+import AppLoading from "expo-app-loading";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Platform,
-} from "react-native";
-import { Searchbar } from "react-native-paper";
+import { ThemeProvider } from "styled-components/native";
+import { useFonts, Ballet_400Regular } from "@expo-google-fonts/ballet";
+import { DotGothic16_400Regular } from "@expo-google-fonts/dotgothic16";
 
-const isAndroid = Platform.OS === "android";
+import { theme } from "./src/infrastructure/theme";
+import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
 
 export default function App() {
-  return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.search}>
-          <Searchbar />
-        </View>
-        <View style={styles.content}>
-          <Text style={styles.text}>🥰 content 🥰</Text>
-        </View>
-      </SafeAreaView>
-      <ExpoStatusBar />
-    </>
-  );
-}
+  let [fontsLoaded] = useFonts({
+    Ballet_400Regular,
+    DotGothic16_400Regular,
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight,
-    backgroundColor: "#f5c4ed",
-  },
-  search: {
-    backgroundColor: "#e66ed4",
-    padding: 16,
-  },
-  content: {
-    backgroundColor: "#f5c4ed",
-    flex: 1,
-    padding: 16,
-  },
-  text: { paddingVertical: 5, paddingLeft: 5 },
-});
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <>
+        <ThemeProvider theme={theme}>
+          <RestaurantsScreen />
+        </ThemeProvider>
+        <ExpoStatusBar />
+      </>
+    );
+  }
+}
