@@ -9,8 +9,8 @@ import {
   SvgsRow,
   Rating,
   RestaurantType,
-} from "./restaurant-info.styles";
-import { Text } from "../../../components/typography/text.component";
+} from "./RestaurantInfo.styles";
+import { Text } from "../../../components/typography/Text";
 
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
@@ -31,8 +31,8 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <RestaurantCard elevation={5}>
-      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+    <RestaurantCard elevation={5} key={name}>
+      <RestaurantCardCover source={{ uri: photos[0] }} />
       <Info>
         <Text variant="title">{name}</Text>
         <SvgsRow>

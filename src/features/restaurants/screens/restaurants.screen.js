@@ -1,25 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
-import { StatusBar } from "react-native";
+import { FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
 
-import { RestaurantInfo } from "../components/restaurant-info.component";
-
-const SafeArea = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${(props) => props.theme.colors.bg.primary};
-   {
-    ${StatusBar.currentHeight} && margin-top: ${StatusBar.currentHeight}px
-  }
-`;
+import { RestaurantInfo } from "../components/RestaurantInfo";
+import { Spacer } from "../../../components/utils/spacer/Spacer";
+import { SafeArea } from "../../../components/utils/safe-area/SafeArea";
 
 const SearchContainer = styled.View`
   background-color: ${(props) => props.theme.colors.brand.accent};
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-const ListContainer = styled.View`
-  flex: 1;
   padding: ${(props) => props.theme.space[3]};
 `;
 
@@ -32,16 +21,30 @@ const Heading = styled.Text`
   font-family: ${(props) => props.theme.fonts.heading};
 `;
 
+const RestaurantList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
+
 export const RestaurantsScreen = () => {
   return (
     <SafeArea>
       <SearchContainer>
         <Searchbar />
       </SearchContainer>
-      <ListContainer>
-        <Heading>🐁 🎀 C🍑NTENT 🎀 🐁</Heading>
-        <RestaurantInfo />
-      </ListContainer>
+      <Heading>🐁 🎀 C🍑NTENT 🎀 🐁</Heading>
+      <RestaurantList
+        data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
+        renderItem={() => (
+          <>
+            <Spacer position="bottom" size="large">
+              <RestaurantInfo />
+            </Spacer>
+          </>
+        )}
+        keyExtractor={(item) => item.name}
+      />
     </SafeArea>
   );
 };
