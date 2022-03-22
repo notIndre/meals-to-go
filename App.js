@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { theme } from "./src/infrastructure/theme";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 import { RestaurantsScreen } from "./src/features/restaurants/screens/Restaurants.screen";
 
 function MapScreen() {
@@ -51,37 +52,42 @@ export default function App() {
     return (
       <>
         <ThemeProvider theme={theme}>
-          <RestaurantsContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={({ route }) => ({
-                  tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
+          <LocationContextProvider>
+            <RestaurantsContextProvider>
+              <NavigationContainer>
+                <Tab.Navigator
+                  screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                      let iconName;
 
-                    if (route.name === "Restaurants") {
-                      iconName = focused ? "fast-food" : "fast-food-outline";
-                    } else if (route.name === "Map") {
-                      iconName = focused
-                        ? "md-location"
-                        : "md-location-outline";
-                    } else if (route.name === "Settings") {
-                      iconName = focused ? "settings" : "settings-outline";
-                    }
+                      if (route.name === "Restaurants") {
+                        iconName = focused ? "fast-food" : "fast-food-outline";
+                      } else if (route.name === "Map") {
+                        iconName = focused
+                          ? "md-location"
+                          : "md-location-outline";
+                      } else if (route.name === "Settings") {
+                        iconName = focused ? "settings" : "settings-outline";
+                      }
 
-                    return (
-                      <Ionicons name={iconName} size={size} color={color} />
-                    );
-                  },
-                  tabBarActiveTintColor: `${theme.colors.ui.success}`,
-                  tabBarInactiveTintColor: `${theme.colors.ui.secondary}`,
-                })}
-              >
-                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                <Tab.Screen name="Map" component={MapScreen} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
-              </Tab.Navigator>
-            </NavigationContainer>
-          </RestaurantsContextProvider>
+                      return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                      );
+                    },
+                    tabBarActiveTintColor: `${theme.colors.ui.success}`,
+                    tabBarInactiveTintColor: `${theme.colors.ui.secondary}`,
+                  })}
+                >
+                  <Tab.Screen
+                    name="Restaurants"
+                    component={RestaurantsScreen}
+                  />
+                  <Tab.Screen name="Map" component={MapScreen} />
+                  <Tab.Screen name="Settings" component={SettingsScreen} />
+                </Tab.Navigator>
+              </NavigationContainer>
+            </RestaurantsContextProvider>
+          </LocationContextProvider>
         </ThemeProvider>
         <ExpoStatusBar />
       </>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
 import { FlatList } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { Searchbar, ActivityIndicator } from "react-native-paper";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { RestaurantInfo } from "../components/RestaurantInfo";
@@ -28,25 +28,35 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 
+const YassifiedIndicator = styled(ActivityIndicator)`
+  padding-top: ${(props) => props.theme.space[6]};
+`;
+
 export const RestaurantsScreen = () => {
-  const restaurantContext = useContext(RestaurantsContext);
+  const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   return (
     <SafeArea>
       <SearchContainer>
         <Searchbar />
       </SearchContainer>
       <Heading>🐁 🎀 C🍑NTENT 🎀 🐁</Heading>
-      <RestaurantList
-        data={restaurantContext.restaurants}
-        renderItem={() => (
-          <>
-            <Spacer position="bottom" size="large">
-              <RestaurantInfo />
-            </Spacer>
-          </>
-        )}
-        keyExtractor={(item) => item.name}
-      />
+      {!isLoading ? (
+        <RestaurantList
+          data={restaurants}
+          renderItem={({ item }) => {
+            return (
+              <>
+                <Spacer position="bottom" size="large">
+                  <RestaurantInfo restaurant={item} />
+                </Spacer>
+              </>
+            );
+          }}
+          keyExtractor={(item) => item.name}
+        />
+      ) : (
+        <YassifiedIndicator size="large" color="indigo" />
+      )}
     </SafeArea>
   );
 };
