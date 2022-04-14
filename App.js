@@ -15,8 +15,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import { theme } from "./src/infrastructure/theme";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { RestaurantsScreen } from "./src/features/restaurants/screens/Restaurants.screen";
 
 function MapScreen() {

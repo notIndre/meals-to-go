@@ -1,17 +1,13 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
 import { FlatList } from "react-native";
-import { Searchbar, ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { RestaurantInfo } from "../components/RestaurantInfo";
 import { Spacer } from "../../../components/utils/spacer/Spacer";
+import { Search } from "../components/Search";
 import { SafeArea } from "../../../components/utils/safe-area/SafeArea";
-
-const SearchContainer = styled.View`
-  background-color: ${(props) => props.theme.colors.brand.accent};
-  padding: ${(props) => props.theme.space[3]};
-`;
 
 const Heading = styled.Text`
   padding-vertical: ${(props) => props.theme.space[1]};
@@ -36,9 +32,7 @@ export const RestaurantsScreen = () => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   return (
     <SafeArea>
-      <SearchContainer>
-        <Searchbar />
-      </SearchContainer>
+      <Search />
       <Heading>🐁 🎀 C🍑NTENT 🎀 🐁</Heading>
       {!isLoading ? (
         <RestaurantList
