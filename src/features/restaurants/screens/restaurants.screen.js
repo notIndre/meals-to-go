@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
@@ -28,7 +28,7 @@ const YassifiedIndicator = styled(ActivityIndicator)`
   padding-top: ${(props) => props.theme.space[6]};
 `;
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   return (
     <SafeArea>
@@ -39,11 +39,15 @@ export const RestaurantsScreen = () => {
           data={restaurants}
           renderItem={({ item }) => {
             return (
-              <>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("RestaurantDetail");
+                }}
+              >
                 <Spacer position="bottom" size="large">
                   <RestaurantInfo restaurant={item} />
                 </Spacer>
-              </>
+              </TouchableOpacity>
             );
           }}
           keyExtractor={(item) => item.name}
