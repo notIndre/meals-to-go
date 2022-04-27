@@ -4,7 +4,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
+import { theme } from "../../infrastructure/theme";
 import { RestaurantsNavigator } from "./restaurants.navigator";
+
+const Tab = createBottomTabNavigator();
 
 function MapScreen() {
   return (
@@ -23,8 +26,6 @@ function SettingsScreen() {
 }
 
 export const AppNavigator = () => {
-  const Tab = createBottomTabNavigator();
-
   return (
     <NavigationContainer>
       <Tab.Navigator
