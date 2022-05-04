@@ -6,16 +6,9 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { theme } from "../../infrastructure/theme";
 import { RestaurantsNavigator } from "./restaurants.navigator";
+import { MapScreen } from "../../features/map/screens/Map.screen";
 
 const Tab = createBottomTabNavigator();
-
-function MapScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Map!</Text>
-    </View>
-  );
-}
 
 function SettingsScreen() {
   return (
