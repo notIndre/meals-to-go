@@ -4,6 +4,10 @@ import { FlatList, TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import {
+  FavouritesContext,
+  FavouritesContextProvider,
+} from "../../../services/favourites/favourites.context";
 import { RestaurantInfo } from "../components/RestaurantInfo";
 import { Spacer } from "../../../components/utils/spacer/Spacer";
 import { Search } from "../components/Search";
@@ -30,6 +34,7 @@ const YassifiedIndicator = styled(ActivityIndicator)`
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
   return (
     <SafeArea>
       <Search />
