@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import { FlatList, TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
@@ -8,6 +8,7 @@ import {
   FavouritesContext,
   FavouritesContextProvider,
 } from "../../../services/favourites/favourites.context";
+import { FavouritesBar } from "../../../components/favourite/FavouritesBar";
 import { RestaurantInfo } from "../components/RestaurantInfo";
 import { Spacer } from "../../../components/utils/spacer/Spacer";
 import { Search } from "../components/Search";
@@ -35,9 +36,20 @@ const YassifiedIndicator = styled(ActivityIndicator)`
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = useState(false);
+
   return (
     <SafeArea>
-      <Search />
+      <Search
+        isFavesToggled={isToggled}
+        onFavesToggle={() => setIsToggled(!isToggled)}
+      />
+      {isToggled && (
+        <FavouritesBar
+          favourites={favourites}
+          showDetail={navigation.navigate}
+        />
+      )}
       <Heading>🐁 🎀 C🍑NTENT 🎀 🐁</Heading>
       {!isLoading ? (
         <RestaurantList
