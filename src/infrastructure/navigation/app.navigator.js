@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,16 +6,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { theme } from "../../infrastructure/theme";
 import { RestaurantsNavigator } from "./restaurants.navigator";
 import { MapScreen } from "../../features/map/screens/Map.screen";
+import { SettingsScreen } from "../../features/settings/screens/Settings.screen";
 
 const Tab = createBottomTabNavigator();
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
 
 export const AppNavigator = () => {
   return (
