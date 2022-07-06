@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { FlatList, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Text } from "../../../components/typography/Text";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { SafeArea } from "../../../components/utils/safe-area/SafeArea";

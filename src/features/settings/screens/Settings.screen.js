@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native";
 import { Avatar, List } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text } from "../../../components/typography/Text";
 import { Spacer } from "../../../components/utils/spacer/Spacer";
 import { SafeArea } from "../../../components/utils/safe-area/SafeArea";
@@ -15,10 +18,26 @@ const UserContainer = styled.View`
 `;
 
 export const SettingsScreen = ({ navigation }) => {
+  const [photo, setPhoto] = useState(null);
+  const getProfilePicture = async () => {
+    const photoSrc = await AsyncStorage.getItem("user-photo");
+    setPhoto(photoSrc);
+  };
+
+  useFocusEffect(() => {
+    getProfilePicture();
+  }, [photo, getProfilePicture]);
+
   return (
     <SafeArea>
       <UserContainer>
-        <Avatar.Icon size={100} icon="pirate" backgroundColor="#c91a2f" />
+        <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+          {!photo ? (
+            <Avatar.Icon size={100} icon="pirate" backgroundColor="#c91a2f" />
+          ) : (
+            <Avatar.Image size={100} source={{ uri: photo }} />
+          )}
+        </TouchableOpacity>
         <Spacer position="top" size="large">
           <Text variant="title">hello, indre</Text>
         </Spacer>

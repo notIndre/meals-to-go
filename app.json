@@ -4,7 +4,7 @@
     "slug": "meals-to-go",
     "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./meow_blep.png",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splashpig.png",
       "resizeMode": "contain",
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/meow_blep.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/meow_blep.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }
